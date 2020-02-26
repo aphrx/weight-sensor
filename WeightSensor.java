@@ -8,7 +8,7 @@ public class WeightSensor extends Sensor<Boolean> {
     private final int pin_dout;
     private final int pin_sck;
 
-    private GpioPinDigitalInput swPin;
+    private GpioPinDigitalInput wsPin;
 
     public WeightSensor(int d_out, int sck) {
         this.pin_dout = d_out;
