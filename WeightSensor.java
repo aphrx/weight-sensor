@@ -29,4 +29,8 @@ public class WeightSensor extends Sensor<Boolean> {
 
         return wsPin.getState().isHigh();
     }
+
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+    }
 }
