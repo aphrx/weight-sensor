@@ -3,7 +3,7 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.RaspiPin;
 
-public class WeightSensor extends Sensor<Boolean> {
+public class WeightSensor {
 
     private final int pin_dout;
     private final int pin_sck;
@@ -15,13 +15,11 @@ public class WeightSensor extends Sensor<Boolean> {
         this.pin_sck = sck;
     }
 
-    @Override
     public void init() {
         final GpioController controller = GpioFactory.getInstance();
         wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin));
     }
 
-    @Override
     public Boolean getReading() {
         if (wsPin == null)
             throw new IllegalStateException("Digital input pin not initialized");
