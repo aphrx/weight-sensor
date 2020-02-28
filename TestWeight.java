@@ -27,7 +27,7 @@ class WeightSensor {
     public void read() {
     	pin_dout.setState(PinState.LOW);
     	while(!isReady()){
-    		sleep(1)
+    		sleep(1);
     	}
 
     	long count = 0;
