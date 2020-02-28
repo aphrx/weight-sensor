@@ -6,7 +6,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.PinState;
 
 class WeightSensor {
-	final GpioController controller;
+	private GpioController controller;
 
     private final GpioPinDigitalOutput pin_dout;
     private final GpioPinDigitalInput pin_sck;
@@ -25,10 +25,10 @@ class WeightSensor {
         //wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
-    public int read() {
+    public double read() {
     	pin_dout.setState(PinState.LOW);
 
-    	long count = 0;
+    	double count = 0;
     	for (int i=0; i< this.gain; i++){
     		pin_dout.setState(PinState.HIGH);
     		count = count << 1;
@@ -44,13 +44,6 @@ class WeightSensor {
     	return count;
 
     }
-
-    public int getReading() {
-        if (wsPin == null)
-            throw new IllegalStateException("Digital input pin not initialized");
-
-        return read();
-    }
 }
 
 public class TestWeight {
@@ -58,7 +51,7 @@ public class TestWeight {
 	public static void main(String[] args){
 		WeightSensor ws = new WeightSensor();
 		ws.init();
-		System.out.println(ws.getReading());	
+		System.out.println(ws.read());	
 	}	
 	
 }
