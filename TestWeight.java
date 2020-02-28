@@ -24,13 +24,6 @@ class WeightSensor {
     public long read() {
     	pin_dout.setState(PinState.LOW);
 
-    	while(!pin_sck.isLow()){
-    		try {
-            	Thread.sleep(1);
-        	} catch (Exception ex) {
-        	}
-    	}
-
     	long count = 0;
     	for (int i=0; i< this.gain; i++){
     		pin_dout.setState(PinState.HIGH);
