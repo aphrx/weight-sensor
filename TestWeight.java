@@ -25,10 +25,10 @@ class WeightSensor {
         //wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
-    public double read() {
+    public long read() {
     	pin_dout.setState(PinState.LOW);
 
-    	double count = 0;
+    	long count = 0;
     	for (int i=0; i< this.gain; i++){
     		pin_dout.setState(PinState.HIGH);
     		count = count << 1;
