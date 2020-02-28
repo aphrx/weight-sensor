@@ -16,9 +16,7 @@ class WeightSensor {
     	controller = GpioFactory.getInstance();
         this.pin_dout = controller.provisionDigitalOutputPin(RaspiPin.getPinByAddress(21));
         this.pin_sck = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(22));
-        //this.pin_sck = 6;
         this.gain = 24;
-
     }
 
     public long read() {
@@ -35,7 +33,7 @@ class WeightSensor {
     	}
 
     	pin_dout.setState(PinState.HIGH);
-    	count = count ^ 0x800000;
+    	// count = count ^ 0x800000;
     	pin_dout.setState(PinState.LOW);
     	return count;
 
