@@ -33,7 +33,7 @@ public class TestWeight {
 	public static void main(String[] args){
 		WeightSensor ws = new WeightSensor();
 		ws.init();
-		System.out.pritnln(ws.getReading());	
+		System.out.println(ws.getReading());	
 	}	
 	
 }
