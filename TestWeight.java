@@ -6,30 +6,27 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.PinState;
 
 class WeightSensor {
+	final GpioController controller;
 
     private final GpioPinDigitalOutput pin_dout;
     private final GpioPinDigitalInput pin_sck;
     private int gain;
 
-    private GpioPinDigitalInput wsPin;
-
     public WeightSensor() {
-        this.pin_dout = 5;
-        this.pin_sck = 6;
+        this.pin_dout = controller.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5));
+        this.pin_sck = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(6));
+        //this.pin_sck = 6;
         this.gain = 120;
 
     }
 
     public void init() {
-        final GpioController controller = GpioFactory.getInstance();
-        wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
+        controller = GpioFactory.getInstance();
+        //wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
     public int read() {
     	pin_dout.setState(PinState.LOW);
-    	while(!isReady()){
-    		sleep(1);
-    	}
 
     	long count = 0;
     	for (int i=0; i< this.gain; i++){
@@ -44,7 +41,7 @@ class WeightSensor {
     	pin_dout.setState(PinState.HIGH);
     	count = count ^ 0x800000;
     	pin_dout.setState(PinState.LOW);
-    	return value;
+    	return count;
 
     }
 
