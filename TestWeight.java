@@ -3,7 +3,7 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.RaspiPin;
 
-private class WeightSensor {
+class WeightSensor {
 
     private final int pin_dout;
     private final int pin_sck;
