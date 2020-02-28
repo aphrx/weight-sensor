@@ -1,6 +1,6 @@
 package weightsensor;
 
-import WeightSensor.*;
+import WeightSensor;
 
 public class TestWeight {
 	
