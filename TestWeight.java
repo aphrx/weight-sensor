@@ -17,17 +17,19 @@ class WeightSensor {
         this.pin_dout = controller.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5));
         this.pin_sck = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(6));
         //this.pin_sck = 6;
-        this.gain = 120;
+        this.gain = 24;
 
-    }
-
-    public void init() {
-        
-        //wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
     public long read() {
     	pin_dout.setState(PinState.LOW);
+
+    	while(!pin__sck.isLow()){
+    		try {
+            	Thread.sleep(delay);
+        	} catch (Exception ex) {
+        	}
+    	}
 
     	long count = 0;
     	for (int i=0; i< this.gain; i++){
