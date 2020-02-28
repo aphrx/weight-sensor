@@ -24,7 +24,7 @@ class WeightSensor {
         if (wsPin == null)
             throw new IllegalStateException("Digital input pin not initialized");
 
-        return 99;
+        return (int)wsPin.getState().isHigh();
     }
 }
 
