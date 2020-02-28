@@ -1,18 +1,22 @@
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.RaspiPin;
 
 class WeightSensor {
 
-    private final int pin_dout;
-    private final int pin_sck;
+    private final GpioPinDigitalOutput pin_dout;
+    private final GpioPinDigitalInput pin_sck;
+    private int gain;
 
     private GpioPinDigitalInput wsPin;
 
     public WeightSensor() {
-        this.pin_dout = 4;
-        this.pin_sck = 5;
+        this.pin_dout = 5;
+        this.pin_sck = 6;
+        this.gain = 120;
+
     }
 
     public void init() {
@@ -20,11 +24,34 @@ class WeightSensor {
         wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
+    public void read() {
+    	pin_dout.setState(PinState.LOW);
+    	while(!isReady()){
+    		sleep(1)
+    	}
+
+    	long count = 0;
+    	for (int i=0; i< this.gain; i++){
+    		pin_dout.setState(PinState.HIGH);
+    		count = count << 1;
+    		pin_dout.setState(PinState.LOW);
+    		if(pin_sck.isHigh()){
+    			count++;
+    		}
+    	}
+
+    	pin_dout.setState(PinState.HIGH);
+    	count = count ^ 0x800000;
+    	pin_dout.setState(PinState.LOW);
+    	return value;
+
+    }
+
     public int getReading() {
         if (wsPin == null)
             throw new IllegalStateException("Digital input pin not initialized");
 
-        return (int)wsPin.getState().isHigh();
+        return read();
     }
 }
 
