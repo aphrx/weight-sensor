@@ -20,11 +20,11 @@ class WeightSensor {
         wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
-    public Boolean getReading() {
+    public int getReading() {
         if (wsPin == null)
             throw new IllegalStateException("Digital input pin not initialized");
 
-        return "Hello";
+        return 99;
     }
 }
 
