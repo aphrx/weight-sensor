@@ -13,6 +13,7 @@ class WeightSensor {
     private int gain;
 
     public WeightSensor() {
+    	controller = GpioFactory.getInstance();
         this.pin_dout = controller.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5));
         this.pin_sck = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(6));
         //this.pin_sck = 6;
@@ -21,7 +22,7 @@ class WeightSensor {
     }
 
     public void init() {
-        controller = GpioFactory.getInstance();
+        
         //wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
