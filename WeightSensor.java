@@ -7,14 +7,14 @@ import com.pi4j.io.gpio.RaspiPin;
 
 public class WeightSensor {
 
-    private int pin_dout = 4;
-    private int pin_sck = 5;
+    private final int pin_dout;
+    private final int pin_sck;
 
     private GpioPinDigitalInput wsPin;
 
     public WeightSensor() {
-        this.pin_dout = d_out;
-        this.pin_sck = sck;
+        this.pin_dout = 4;
+        this.pin_sck = 5;
     }
 
     public void init() {
