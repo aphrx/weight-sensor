@@ -24,7 +24,7 @@ class WeightSensor {
         wsPin = controller.provisionDigitalInputPin(RaspiPin.getPinByAddress(pin_dout));
     }
 
-    public void read() {
+    public int read() {
     	pin_dout.setState(PinState.LOW);
     	while(!isReady()){
     		sleep(1);
