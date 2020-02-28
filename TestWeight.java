@@ -1,4 +1,4 @@
-package weight-sensor;
+package weightsensor;
 
 import WeightSensor.*;
 
