@@ -24,9 +24,9 @@ class WeightSensor {
     public long read() {
     	pin_dout.setState(PinState.LOW);
 
-    	while(!pin__sck.isLow()){
+    	while(!pin_sck.isLow()){
     		try {
-            	Thread.sleep(delay);
+            	Thread.sleep(1);
         	} catch (Exception ex) {
         	}
     	}
@@ -53,7 +53,6 @@ public class TestWeight {
 	
 	public static void main(String[] args){
 		WeightSensor ws = new WeightSensor();
-		ws.init();
 		System.out.println(ws.read());	
 	}	
 	
